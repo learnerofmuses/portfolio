@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ty — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F4F6F9;
+    --warm-brown: #4A6580;
+    --deep-brown: #1A2B3C;
+    --soft-orange: #4A8FBF;
+    --muted-sage: #7A96AB;
+    --text: #1A2B3C;
+    --text-muted: #6B8296;
+    --card-bg: #FFFFFF;
+    --border: rgba(74, 111, 143, 0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(244, 246, 249, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Lora', serif; font-size: 1.2rem; color: var(--deep-brown); font-weight: 600; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--soft-orange); }
+
+  section { padding: 6rem 0; }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+  }
+  .hero-inner { display: flex; align-items: center; gap: 4rem; max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+  .hero-avatar {
+    flex-shrink: 0;
+    width: 180px; height: 180px;
+    border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+    background: linear-gradient(135deg, #7AB3D4 0%, #4A6F8F 55%, #1A2B3C 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Lora', serif; font-size: 3rem; color: rgba(255,255,255,0.9);
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .hero-text h1 { font-family: 'Lora', serif; font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.15; color: var(--deep-brown); margin-bottom: 0.5rem; }
+  .hero-text h1 em { font-style: italic; color: var(--soft-orange); }
+  .hero-tagline { font-size: 1.05rem; color: var(--text-muted); margin: 1rem 0 1.8rem; font-weight: 300; line-height: 1.7; max-width: 400px; }
+  .hero-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--soft-orange); color: white; padding: 0.75rem 1.6rem; border-radius: 100px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .hero-cta:hover { background: #3A7BAD; transform: translateY(-1px); }
+
+  .blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.2; pointer-events: none; }
+  .blob-1 { width: 380px; height: 380px; background: #7AB3D4; top: 10%; right: -5%; }
+  .blob-2 { width: 260px; height: 260px; background: #A8C4D8; bottom: 15%; left: -5%; }
+
+  .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--soft-orange); margin-bottom: 0.5rem; }
+  .section-title { font-family: 'Lora', serif; font-size: clamp(1.8rem, 3.5vw, 2.4rem); color: var(--deep-brown); margin-bottom: 1rem; line-height: 1.2; }
+  .section-divider { width: 40px; height: 2px; background: var(--soft-orange); border-radius: 2px; margin-bottom: 2.5rem; }
+
+  #about { background: var(--cream); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .about-text p { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 1rem; }
+  .about-facts { display: flex; flex-direction: column; gap: 1.2rem; }
+  .fact-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 1.2rem 1.4rem; display: flex; align-items: center; gap: 1rem; transition: transform 0.2s; }
+  .fact-card:hover { transform: translateX(4px); }
+  .fact-icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(74, 143, 191, 0.1); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .fact-info .label { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+  .fact-info .value { font-size: 0.95rem; font-weight: 500; color: var(--deep-brown); margin-top: 2px; }
+
+  #projects { background: #E8EEF4; }
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .project-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 1.8rem; position: relative; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; cursor: pointer; }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,43,60,0.1); }
+  .project-card.featured { grid-column: 1 / -1; }
+  .project-tag { display: inline-flex; align-items: center; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; margin-bottom: 1rem; }
+  .tag-blue { background: rgba(74, 143, 191, 0.12); color: #3A7BAD; }
+  .tag-slate { background: rgba(106, 130, 150, 0.15); color: #4A6580; }
+  .tag-steel { background: rgba(90, 115, 140, 0.12); color: #3D6080; }
+  .project-card h3 { font-family: 'Lora', serif; font-size: 1.25rem; color: var(--deep-brown); margin-bottom: 0.5rem; }
+  .project-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.2rem; }
+  .tech-pill { font-size: 0.72rem; padding: 3px 10px; border-radius: 100px; background: var(--cream); border: 1px solid var(--border); color: var(--text-muted); }
+  .project-arrow { position: absolute; top: 1.6rem; right: 1.6rem; width: 32px; height: 32px; border-radius: 50%; background: var(--cream); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: var(--text-muted); transition: background 0.2s, color 0.2s; }
+  .project-card:hover .project-arrow { background: var(--soft-orange); color: white; border-color: var(--soft-orange); }
+
+  #skills { background: var(--cream); }
+  .skills-layout { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .skill-group { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 1.6rem; }
+  .skill-group-title { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft-orange); margin-bottom: 1rem; }
+  .skill-item { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(74,111,143,0.07); }
+  .skill-item:last-child { border-bottom: none; }
+  .skill-name { font-size: 0.9rem; color: var(--deep-brown); }
+  .skill-dots { display: flex; gap: 4px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(74, 143, 191, 0.18); }
+  .dot.filled { background: var(--soft-orange); }
+
+  #contact { background: var(--deep-brown); }
+  #contact .section-label { color: #7AB3D4; }
+  #contact .section-title { color: #F4F6F9; }
+  #contact .section-divider { background: #4A8FBF; }
+  .contact-inner { text-align: center; }
+  .contact-inner p { color: rgba(244,246,249,0.55); font-size: 1rem; line-height: 1.8; max-width: 480px; margin: 0 auto 2.5rem; }
+  .contact-email { font-family: 'Lora', serif; font-size: 1.4rem; color: #F4F6F9; text-decoration: none; border-bottom: 1px solid rgba(74, 143, 191, 0.5); padding-bottom: 4px; transition: border-color 0.2s, color 0.2s; margin-bottom: 2.5rem; display: block; }
+  .contact-email:hover { color: #7AB3D4; border-color: #7AB3D4; }
+  .social-row { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; }
+  .social-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(244,246,249,0.2); display: flex; align-items: center; justify-content: center; color: rgba(244,246,249,0.55); text-decoration: none; font-size: 1rem; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+  .social-btn:hover { background: rgba(74,143,191,0.2); border-color: #4A8FBF; color: #7AB3D4; }
+
+  footer { background: var(--deep-brown); border-top: 1px solid rgba(244,246,249,0.08); text-align: center; padding: 1.5rem; font-size: 0.78rem; color: rgba(244,246,249,0.3); }
+
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .hero-inner { flex-direction: column; text-align: center; gap: 2rem; }
+    .hero-tagline { max-width: 100%; }
+    .about-grid, .projects-grid, .skills-layout { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: 1; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Muses.</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="hero-inner">
+    <div class="hero-avatar">Muses</div>
+    <div class="hero-text">
+      <h1>Building things <em>with care</em> on the web.</h1>
+      <p class="hero-tagline">I'm a software developer who loves turning complex problems into clean, human-friendly experiences.</p>
+      <a href="#projects" class="hero-cta">See my work →</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <p class="section-label">Who I am</p>
+    <h2 class="section-title">Nice to meet you</h2>
+    <div class="section-divider"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a software developer with a passion for building reliable, thoughtful software. I care as much about the people using what I build as the code behind it.</p>
+        <p>Whether it's a polished frontend or a rock-solid API, I bring the same attention to detail to every layer of the stack. Outside of code, I'm constantly curious — always learning something new.</p>
+      </div>
+      <div class="about-facts">
+        <div class="fact-card"><div class="fact-icon">📍</div><div class="fact-info"><div class="label">Based in</div><div class="value">New Jersey, USA</div></div></div>
+        <div class="fact-card"><div class="fact-icon">💼</div><div class="fact-info"><div class="label">Focus</div><div class="value">Cloud and DevOps</div></div></div>
+        <div class="fact-card"><div class="fact-icon">☕</div><div class="fact-info"><div class="label">Currently exploring</div><div class="value">Modern backend architecture</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <p class="section-label">What I've made</p>
+    <h2 class="section-title">Selected work</h2>
+    <div class="section-divider"></div>
+    <div class="projects-grid">
+      <div class="project-card featured" onclick="window.open('https://github.com/learnerofmuses/Secure-Cart-Project', '_blank')" style="cursor:pointer;">
+        <span class="project-arrow">↗</span>
+        <span class="project-tag tag-blue">Automation</span>
+        <h3>Three-Tier Web Application</h3>
+        <p>We built a scalable three-tier web application using Terraform and AWS services. This multi-tier architecture consists of a web, application, and database tier.</p>
+        <div class="project-tech"><span class="tech-pill">Terraform</span><span class="tech-pill">Bash</span><span class="tech-pill">RDS</span><span class="tech-pill">EC2</span><span class="tech-pill">Application Load Balancer</span></div>
+      </div>
+      <div class="project-card" onclick="window.open('https://github.com/learnerofmuses/ec2-terraform-launch', '_blank')" style="cursor:pointer;">
+        <span class="project-arrow">↗</span>
+        <span class="project-tag tag-slate">Automation</span>
+        <h3>EC2 Deployment Using Terraform</h3>
+        <p>We automated the deployment of EC2 instances using Terraform.</p>
+        <div class="project-tech"><span class="tech-pill">Terraform</span><span class="tech-pill">VPC</span><span class="tech-pill">EC2</span></div>
+      </div>
+      <div class="project-card">
+        <span class="project-arrow">↗</span>
+        <span class="project-tag tag-steel">COMING SOON</span>
+        <h3>CICD w/ Docker Deployment</h3>
+        <p>.</p>
+        <div class="project-tech"><span class="tech-pill">Terraform</span><span class="tech-pill">Docker</span></div>
+      </div>
+      <div class="project-card" onclick="window.open('https://github.com/learnerofmuses/aws-lex-translator', '_blank')" style="cursor:pointer;">
+        <span class="project-arrow">↗</span>
+        <span class="project-tag tag-steel">Chatbot/AI Integration</span>
+        <h3>Amazon Translation Chatbot</h3>
+        <p>An AI-powered chatbot that provides translation services across six different languages.</p>
+        <div class="project-tech"><span class="tech-pill">Amazon Lex</span><span class="tech-pill">Lambda</span><span class="tech-pill">Python</span><span class="tech-pill">Kommunicate</span><span class="tech-pill">S3</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <p class="section-label">What I know</p>
+    <h2 class="section-title">Skills & tools</h2>
+    <div class="section-divider"></div>
+    <div class="skills-layout">
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-item"><span class="skill-name">JavaScript</span><div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Python</span><div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+        <div class="skill-item"><span class="skill-name">HTML & CSS</span><div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></div>
+        <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Frameworks</div>
+        <div class="skill-item"><span class="skill-name">Node.js</span><div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Express.js</span><div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+        <div class="skill-item"><span class="skill-name">React</span><div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+        <div class="skill-item"><span class="skill-name">REST APIs</span><div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Tools & Ops</div>
+        <div class="skill-item"><span class="skill-name">AWS</span><div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Git & GitHub</span><div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Docker</span><div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Linux / CLI</span><div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Terraform</span><div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <p class="section-label">Get in touch</p>
+      <h2 class="section-title">Let's work together</h2>
+      <div class="section-divider" style="margin: 0 auto 2.5rem;"></div>
+      <p>Whether you have a project in mind, a role to fill, or just want to say hi — my inbox is always open. I'll do my best to get back to you quickly.</p>
+      <a href="mailto:tyscott039@gmail.com" class="contact-email">tyscott039@gmail.com</a>
+      <div class="social-row">
+        <a href="https://github.com/learnerofmuses?tab=repositories" class="social-btn" title="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+        <a href="https://www.linkedin.com/in/tylerscott3" class="social-btn" title="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+        <a href="https://medium.com/@tyscott039" class="social-btn" title="Medium"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22,6.41668h-.791a.89762.89762,0,0,0-.709.69479v9.83021a.83938.83938,0,0,0,.709.64164H22V19.9167H14.83334V17.58332h1.50008V7.25h-.07353L12.75706,19.9167H10.04512L6.58751,7.25H6.5V17.58332H8V19.9167H2V17.58332h.76835A.841.841,0,0,0,3.5,16.94168V7.11139a.89588.89588,0,0,0-.73166-.69479H2V4.0833H9.50266L11.96593,13.25h.068L14.51976,4.0833H22V6.41668"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Ty. Built with care.</footer>
+
+</body>
+</html>
